@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Slider from "../buttons/Slider";
 
-function PlayerSelectionCard() {
-  const [userSelection, setUserSelection] = useState('O');
+function PlayerSelectionCard({ userSelection, setUserSelection }) {
 
   const handleSelection = (symbol) => {
     setUserSelection(symbol);

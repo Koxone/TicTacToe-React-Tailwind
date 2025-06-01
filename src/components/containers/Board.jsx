@@ -1,20 +1,20 @@
-import React from 'react'
-import BoardCard from '../cards/BoardCard'
+import React, { useState } from "react";
+import BoardCard from "../cards/BoardCard";
 
-function Board() {
+function Board({ currentTurn, onMove }) {
   return (
-    <div className='w-[328px] h-[328px] sm:w-[460px] sm:h-[461px] flex flex-wrap gap-4 items-center justify-center'>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
-        <BoardCard icon='o'/>
+    <div className="w-[328px] h-[328px] sm:w-[460px] sm:h-[461px] flex flex-wrap gap-4 items-center justify-center">
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
+      <BoardCard icon={currentTurn.toLowerCase()} onMove={onMove} />
     </div>
-  )
+  );
 }
 
-export default Board
+export default Board;
