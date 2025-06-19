@@ -1,6 +1,5 @@
 import React from "react";
 import "../../../src/index.css";
-import { useGameContext } from "../../context/GameContext";
 
 function MainButton({
   text = "",
@@ -9,8 +8,6 @@ function MainButton({
   hover = "",
   onClick,
 }) {
-  const { modeSelection, setModeSelection } = useGameContext();
-
   return (
     <div className="relative w-full h-12">
       <button
