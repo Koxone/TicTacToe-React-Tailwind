@@ -10,6 +10,11 @@ export default function GameProvider({ children }) {
   const [currentUserTurn, setCurrentUserTurn] = useState("O");
   const [initialState, setInitialState] = useState("O");
 
+  const [restartGame, setRestartGame] = useState(false);
+  const [win, setWin] = useState(false);
+  const [lose, setLose] = useState(false);
+  const [tied, setTied] = useState(false);
+
   useEffect(() => {
     const storedUserSelection = localStorage.getItem("userSelection");
     const storedModeSelection = localStorage.getItem("modeSelection");
@@ -50,6 +55,14 @@ export default function GameProvider({ children }) {
     setInitialState,
     playerTurn,
     setPlayerTurn,
+    restartGame,
+    setRestartGame,
+    win,
+    setWin,
+    lose,
+    setLose,
+    tied,
+    setTied,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

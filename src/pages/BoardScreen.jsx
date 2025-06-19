@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import BoardHeader from "../components/header/BoardHeader";
 import Board from "../components/containers/Board";
 import ScoreCard from "../components/cards/ScoreCard";
 import { useGameContext } from "../context/GameContext";
+import RestartTied from "../components/feedback/RestartTied";
 
 function BoardScreen() {
   const { userSelection, playerTurn } = useGameContext();
@@ -16,6 +16,7 @@ function BoardScreen() {
       className="BoardScreen flex flex-col items-center justify-center w-screen min-h-screen pt-6 pl-6 pr-6 pb-[127px] 
       sm:pt-0 sm:pl-0 sm:pr-0 sm:pb-[0px] gap-16 sm:gap-8 relative"
     >
+      <RestartTied />
       <BoardHeader />
       <div className="flex flex-col gap-6">
         <Board />
