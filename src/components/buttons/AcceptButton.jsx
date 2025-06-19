@@ -6,27 +6,21 @@ function AcceptButton({ text = "" }) {
   const {
     userSelection,
     setUserSelection,
-    modeSelection,
     setModeSelection,
-    currentTurnNumber,
     setCurrentTurnNumber,
-    currentUserTurn,
     setCurrentUserTurn,
     initialState,
     setInitialState,
-    playerTurn,
     setPlayerTurn,
     restartGame,
     setRestartGame,
     winnerFound,
     setWinnerFound,
-    lose,
     setLose,
     tied,
     setTied,
     setP1Score,
     setP2Score,
-    setWinnerData,
   } = useGameContext();
 
   const restartGameAction = () => {

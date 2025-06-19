@@ -3,7 +3,7 @@ import CancelButton from "../buttons/CancelButton";
 import AcceptButton from "../buttons/AcceptButton";
 import { useGameContext } from "../../context/GameContext";
 
-function RestartTied({ subtitle = "", color = "", icon = "" }) {
+function RestartTied() {
   const { restartGame, setRestartGame, tied, setTied } = useGameContext();
 
   if (!restartGame && !tied) return null;

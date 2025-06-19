@@ -4,16 +4,8 @@ import { useGameContext } from "../../context/GameContext";
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
 
-function Options({
-  text1 = "",
-  text2 = "",
-  title = "",
-  subtitle = "",
-  color = "",
-  icon = "",
-}) {
-  const { winnerFound, setWinnerFound, lose, setLose, winnerData } =
-    useGameContext();
+function Options() {
+  const { winnerFound, winnerData, lose } = useGameContext();
 
   useEffect(() => {
     if (winnerFound) {

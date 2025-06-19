@@ -1,7 +1,7 @@
 import { useGameContext } from "../../context/GameContext";
 
 function RestartButton() {
-  const { setRestartGame, setP1Score, setP2Score } = useGameContext();
+  const { setRestartGame } = useGameContext();
 
   const handler = () => {
     setRestartGame(true);

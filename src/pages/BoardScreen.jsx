@@ -10,8 +10,6 @@ function BoardScreen() {
 
   if (!playerTurn) return null;
 
-  const mode = userSelection === "O" ? "P1" : "P2";
-
   return (
     <div
       className="BoardScreen flex flex-col items-center justify-center w-screen min-h-screen pt-6 pl-6 pr-6 pb-[127px] 
