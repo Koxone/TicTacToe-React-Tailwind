@@ -18,8 +18,8 @@ function AcceptButton({ text = "" }) {
     setPlayerTurn,
     restartGame,
     setRestartGame,
-    win,
-    setWin,
+    winnerFound,
+    setWinnerFound,
     lose,
     setLose,
     tied,
@@ -41,7 +41,7 @@ function AcceptButton({ text = "" }) {
     setInitialState(defaultSelection);
     setPlayerTurn(calculatedPlayerTurn); // 👈 vuelve a setearlo
     setRestartGame(false);
-    setWin(false);
+    setWinnerFound(false);
     setLose(false);
     setTied(false);
 
@@ -57,7 +57,17 @@ function AcceptButton({ text = "" }) {
     setCurrentUserTurn("O");
     setPlayerTurn(null);
     setRestartGame(false);
-    setWin(false);
+    setWinnerFound(false);
+    setLose(false);
+    setTied(false);
+  };
+
+  const newRoundAction = () => {
+    const defaultTurn = initialState;
+
+    setCurrentUserTurn(defaultTurn);
+    setCurrentTurnNumber(null);
+    setWinnerFound(false);
     setLose(false);
     setTied(false);
   };
@@ -68,6 +78,8 @@ function AcceptButton({ text = "" }) {
       console.log("Restart Button User Selection:", userSelection);
     } else if (tied) {
       tiedGameAction();
+    } else if (winnerFound) {
+      newRoundAction();
     }
   };
   return (

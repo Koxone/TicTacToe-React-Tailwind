@@ -17,9 +17,12 @@ export default function GameProvider({ children }) {
 
   // In Game Results
   const [restartGame, setRestartGame] = useState(false);
-  const [winerFound, setWinerFound] = useState(false);
+  const [winnerFound, setWinnerFound] = useState(false);
   const [lose, setLose] = useState(false);
   const [tied, setTied] = useState(false);
+  const [winnerData, setWinnerData] = useState(null);
+  const [p1Score, setP1Score] = useState(0);
+  const [p2Score, setP2Score] = useState(0);
 
   // Winning Combinations
   const winningCombinations = [
@@ -81,12 +84,19 @@ export default function GameProvider({ children }) {
     setPlayerTurn,
     restartGame,
     setRestartGame,
-    winerFound,
-    setWinerFound,
+    winnerFound,
+    setWinnerFound,
     lose,
     setLose,
     tied,
     setTied,
+    winnerData,
+    setWinnerData,
+    winningCombinations,
+    p1Score,
+    setP1Score,
+    p2Score,
+    setP2Score,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
