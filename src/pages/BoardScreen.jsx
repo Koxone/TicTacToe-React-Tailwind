@@ -6,7 +6,7 @@ import RestartTied from "../components/feedback/RestartTied";
 import Options from "../components/feedback/Options";
 
 function BoardScreen() {
-  const { userSelection, playerTurn, p1Score, p2Score } = useGameContext();
+  const { playerTurn, p1Score, p2Score } = useGameContext();
 
   if (!playerTurn) return null;
 
