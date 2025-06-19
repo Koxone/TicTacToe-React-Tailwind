@@ -11,7 +11,7 @@ function TurnCard() {
     >
       <img
         className="w-4 h-4 sm:w-5 sm:h-5"
-        src={`/src/assets/icon-${
+        src={`/assets/icon-${
           currentUserTurn === "X" ? "x" : "o"
         }-solid-grey.svg`}
         alt="icon"

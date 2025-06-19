@@ -23,7 +23,7 @@ function Slider() {
         <button onClick={() => handleClick("X")} id="X" className="z-10">
           <img
             className="w-8 h-8 cursor-pointer"
-            src={`/src/assets/icon-x-${
+            src={`/assets/icon-x-${
               selected === "X" ? "solid-dark" : "solid"
             }-grey.svg`}
             alt="icon X"
@@ -33,7 +33,7 @@ function Slider() {
         <button onClick={() => handleClick("O")} id="O" className="z-10">
           <img
             className="w-8 h-8 cursor-pointer"
-            src={`/src/assets/icon-o-${
+            src={`/assets/icon-o-${
               selected === "O" ? "solid-dark" : "solid"
             }-grey.svg`}
             alt="icon O"

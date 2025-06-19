@@ -13,7 +13,7 @@ function BoardCard({ value, onClick }) {
         {value && (
           <img
             className="w-10 h-10 sm:w-16 sm:h-16"
-            src={`/src/assets/icon-${value}.svg`}
+            src={`/assets/icon-${value}.svg`}
             alt={`icon ${value}`}
           />
         )}

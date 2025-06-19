@@ -45,7 +45,7 @@ function Options() {
           <div className="flex items-center gap-2">
             <img
               className="w-[30px]"
-              src={`/src/assets/icon-${winnerData?.symbol}.svg`}
+              src={`/assets/icon-${winnerData?.symbol}.svg`}
               alt=""
             />
             <strong
