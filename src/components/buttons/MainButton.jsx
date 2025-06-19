@@ -1,7 +1,16 @@
 import React from "react";
 import "../../../src/index.css";
+import { useGameContext } from "../../context/GameContext";
 
-function MainButton({ text = "", color = "", shadow = "", hover = "", onClick }) {
+function MainButton({
+  text = "",
+  color = "",
+  shadow = "",
+  hover = "",
+  onClick,
+}) {
+  const { modeSelection, setModeSelection } = useGameContext();
+
   return (
     <div className="relative w-full h-12">
       <button
