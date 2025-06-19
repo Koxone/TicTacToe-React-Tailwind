@@ -5,29 +5,28 @@ import ScoreCard from "../components/cards/ScoreCard";
 import { useGameContext } from "../context/GameContext";
 
 function BoardScreen() {
-  const { userSelection } = useGameContext();
-  const mode = userSelection === "O" ? "P1" : "P2";
+  const { userSelection, playerTurn } = useGameContext();
 
-  const [currentTurn, setCurrentTurn] = useState("O");
+  if (!playerTurn) return null;
+
+  const mode = userSelection === "O" ? "P1" : "P2";
 
   return (
     <div
       className="BoardScreen flex flex-col items-center justify-center w-screen min-h-screen pt-6 pl-6 pr-6 pb-[127px] 
-    sm:pt-0 sm:pl-0 sm:pr-0 sm:pb-[0px] gap-16 sm:gap-8 relative"
+      sm:pt-0 sm:pl-0 sm:pr-0 sm:pb-[0px] gap-16 sm:gap-8 relative"
     >
       <BoardHeader />
       <div className="flex flex-col gap-6">
-        <div className="">
-          <Board currentTurn={currentTurn} />
-        </div>
+        <Board />
         <div className="flex justify-between w-full">
           <ScoreCard
-            title={mode === "P1" ? "X (P2)" : "X (P1)"}
+            title={`X (${playerTurn.p1 === "X" ? "P1" : "P2"})`}
             color="light-blue"
           />
           <ScoreCard title="TIES" color="silver" />
           <ScoreCard
-            title={mode === "P1" ? "O (P1)" : "O (P2)"}
+            title={`O (${playerTurn.p1 === "O" ? "P1" : "P2"})`}
             color="light-yellow"
           />
         </div>

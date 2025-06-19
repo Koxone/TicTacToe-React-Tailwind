@@ -1,13 +1,18 @@
 import { useGameContext } from "../../context/GameContext";
 
 function Slider() {
-  const { userSelection, setUserSelection, initialState } = useGameContext();
+  const {
+    userSelection,
+    setUserSelection,
+    initialState,
+    playerTurn,
+    setPlayerTurn,
+  } = useGameContext();
 
   const selected = userSelection || initialState;
 
   const handleClick = (value) => {
     setUserSelection(value);
-    // localStorage.setItem("userSelection", value);
   };
 
   return (
