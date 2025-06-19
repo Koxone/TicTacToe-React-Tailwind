@@ -1,16 +1,20 @@
-import React from "react";
 import CancelButton from "../buttons/CancelButton";
 import AcceptButton from "../buttons/AcceptButton";
 import { useGameContext } from "../../context/GameContext";
 
 function RestartTied() {
-  const { restartGame, setRestartGame, tied, setTied } = useGameContext();
+  const {
+    restartGame,
+    setRestartGame,
+    tied,
+    setTied,
+    resetAction,
+    newRoundAction,
+  } = useGameContext();
 
-  if (!restartGame && !tied) return null;
+  const title = restartGame ? "restart game?" : tied ? "round tied" : "";
 
-  const title = restartGame ? "RESTART GAME?" : tied ? "ROUND TIED" : "";
-  const text1 = restartGame ? "NO, CANCEL" : tied ? "QUIT" : "";
-  const text2 = restartGame ? "YES, RESTART" : tied ? "NEXT ROUND" : "";
+  if (!tied && !restartGame) return;
   return (
     <div
       onClick={() => setRestartGame(false)}
@@ -27,9 +31,9 @@ function RestartTied() {
           </h2>
         </div>
 
-        <div className="flex gap-4">
-          <CancelButton text={text1} />
-          <AcceptButton text={text2} />
+        <div className="flex gap-4 uppercase">
+          <CancelButton />
+          <AcceptButton />
         </div>
       </div>
     </div>
