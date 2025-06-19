@@ -15,6 +15,10 @@ function Board() {
     setWinnerFound,
     setWinnerData,
     winnerFound,
+    p1Score,
+    p2Score,
+    setP1Score,
+    setP2Score,
   } = useGameContext();
 
   useEffect(() => {
@@ -40,6 +44,14 @@ function Board() {
     if (result) {
       setWinnerFound(true);
       setWinnerData(result);
+
+      if (result.player === "P1") {
+        setP1Score(p1Score + 1);
+        localStorage.setItem("p1Score", p1Score + 1);
+      } else {
+        setP2Score(p2Score + 1);
+        localStorage.setItem("p2Score", p2Score + 1);
+      }
     }
   };
 

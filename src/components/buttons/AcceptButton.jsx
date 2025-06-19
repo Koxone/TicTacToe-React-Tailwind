@@ -24,6 +24,9 @@ function AcceptButton({ text = "" }) {
     setLose,
     tied,
     setTied,
+    setP1Score,
+    setP2Score,
+    setWinnerData,
   } = useGameContext();
 
   const restartGameAction = () => {
@@ -72,9 +75,14 @@ function AcceptButton({ text = "" }) {
     setTied(false);
   };
 
+  const handler = () => {};
+
   const action = () => {
     if (restartGame) {
       restartGameAction();
+      localStorage.clear();
+      setP1Score(0);
+      setP2Score(0);
       console.log("Restart Button User Selection:", userSelection);
     } else if (tied) {
       tiedGameAction();

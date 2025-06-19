@@ -21,43 +21,95 @@ export default function GameProvider({ children }) {
   const [lose, setLose] = useState(false);
   const [tied, setTied] = useState(false);
   const [winnerData, setWinnerData] = useState(null);
-  const [p1Score, setP1Score] = useState(0);
-  const [p2Score, setP2Score] = useState(0);
+  const [p1Score, setP1Score] = useState(() => {
+    const stored = localStorage.getItem("p1Score");
+    return stored ? Number(stored) : 0;
+  });
+  const [p2Score, setP2Score] = useState(() => {
+    const stored = localStorage.getItem("p2Score");
+    return stored ? Number(stored) : 0;
+  });
 
-  // Winning Combinations
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
+  // Load from localStorage on mount
   useEffect(() => {
-    const storedUserSelection = localStorage.getItem("userSelection"); //
-    const storedModeSelection = localStorage.getItem("modeSelection"); //
+    const storedUserSelection = localStorage.getItem("userSelection");
+    const storedModeSelection = localStorage.getItem("modeSelection");
     const storedCurrentTurnNumber = localStorage.getItem("currentTurnNumber");
     const storedCurrentUserTurn = localStorage.getItem("currentUserTurn");
     const storedInitialState = localStorage.getItem("initialState");
     const storedPlayerturn = localStorage.getItem("playerTurn");
-
-    if (storedUserSelection) {
-      setUserSelection(storedUserSelection);
-    } else {
-      setUserSelection("O");
-    }
+    const storedWinnerFound = localStorage.getItem("winnerFound");
+    const storedWinnerData = localStorage.getItem("winnerData");
+    const storedLose = localStorage.getItem("lose");
+    const storedTied = localStorage.getItem("tied");
 
     if (storedUserSelection) setUserSelection(storedUserSelection);
     if (storedModeSelection) setModeSelection(storedModeSelection);
-    if (storedCurrentTurnNumber) setCurrentTurnNumber(storedCurrentTurnNumber);
+    if (storedCurrentTurnNumber)
+      setCurrentTurnNumber(Number(storedCurrentTurnNumber));
     if (storedCurrentUserTurn) setCurrentUserTurn(storedCurrentUserTurn);
     if (storedInitialState) setInitialState(storedInitialState);
     if (storedPlayerturn) setPlayerTurn(JSON.parse(storedPlayerturn));
+    if (storedWinnerFound) setWinnerFound(JSON.parse(storedWinnerFound));
+    if (storedWinnerData) setWinnerData(JSON.parse(storedWinnerData));
+    if (storedLose) setLose(JSON.parse(storedLose));
+    if (storedTied) setTied(JSON.parse(storedTied));
   }, []);
 
+  // Save to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("userSelection", userSelection);
+  }, [userSelection]);
+
+  useEffect(() => {
+    localStorage.setItem("modeSelection", modeSelection);
+  }, [modeSelection]);
+
+  useEffect(() => {
+    localStorage.setItem("currentTurnNumber", currentTurnNumber);
+  }, [currentTurnNumber]);
+
+  useEffect(() => {
+    localStorage.setItem("currentUserTurn", currentUserTurn);
+  }, [currentUserTurn]);
+
+  useEffect(() => {
+    localStorage.setItem("initialState", initialState);
+  }, [initialState]);
+
+  useEffect(() => {
+    if (playerTurn) {
+      localStorage.setItem("playerTurn", JSON.stringify(playerTurn));
+    }
+  }, [playerTurn]);
+
+  useEffect(() => {
+    localStorage.setItem("winnerFound", JSON.stringify(winnerFound));
+  }, [winnerFound]);
+
+  useEffect(() => {
+    if (winnerData) {
+      localStorage.setItem("winnerData", JSON.stringify(winnerData));
+    }
+  }, [winnerData]);
+
+  useEffect(() => {
+    localStorage.setItem("p1Score", p1Score);
+  }, [p1Score]);
+
+  useEffect(() => {
+    localStorage.setItem("p2Score", p2Score);
+  }, [p2Score]);
+
+  useEffect(() => {
+    localStorage.setItem("lose", JSON.stringify(lose));
+  }, [lose]);
+
+  useEffect(() => {
+    localStorage.setItem("tied", JSON.stringify(tied));
+  }, [tied]);
+
+  // Player turn auto-calc
   useEffect(() => {
     if (userSelection) {
       const calculatedPlayerTurn = {
@@ -92,7 +144,16 @@ export default function GameProvider({ children }) {
     setTied,
     winnerData,
     setWinnerData,
-    winningCombinations,
+    winningCombinations: [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ],
     p1Score,
     setP1Score,
     p2Score,
