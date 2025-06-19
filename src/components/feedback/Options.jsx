@@ -45,8 +45,8 @@ function Options() {
           <div className="flex items-center gap-2">
             <img
               className="w-[30px]"
-              src={`/assets/icon-${winnerData?.symbol}.svg`}
-              alt=""
+              src={`/assets/icon-${winnerData?.symbol.toLowerCase()}.svg`}
+              alt="game icon"
             />
             <strong
               className={`font-bold text-2xl sm:text-[40px] text-light-${
