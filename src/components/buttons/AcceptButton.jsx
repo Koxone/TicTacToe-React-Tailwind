@@ -27,16 +27,28 @@ function AcceptButton({ text = "" }) {
   } = useGameContext();
 
   const restartGameAction = () => {
-    setUserSelection("O");
+    const defaultSelection = "O";
+    const calculatedPlayerTurn = {
+      p1: defaultSelection,
+      p2: defaultSelection === "O" ? "X" : "O",
+    };
+
+    // Reiniciar el contexto
+    setUserSelection(defaultSelection);
     setModeSelection(null);
     setCurrentTurnNumber(null);
-    setCurrentUserTurn("O");
-    setInitialState("O");
-    setPlayerTurn(null);
+    setCurrentUserTurn(defaultSelection);
+    setInitialState(defaultSelection);
+    setPlayerTurn(calculatedPlayerTurn); // 👈 vuelve a setearlo
     setRestartGame(false);
     setWin(false);
     setLose(false);
     setTied(false);
+
+    // Limpiar localStorage
+    localStorage.clear();
+
+    // Ir a pantalla principal
     navigate("/");
   };
 
@@ -53,6 +65,7 @@ function AcceptButton({ text = "" }) {
   const action = () => {
     if (restartGame) {
       restartGameAction();
+      console.log("Restart Button User Selection:", userSelection);
     } else if (tied) {
       tiedGameAction();
     }

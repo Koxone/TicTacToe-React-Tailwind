@@ -3,6 +3,7 @@ import Board from "../components/containers/Board";
 import ScoreCard from "../components/cards/ScoreCard";
 import { useGameContext } from "../context/GameContext";
 import RestartTied from "../components/feedback/RestartTied";
+import Options from "../components/feedback/Options";
 
 function BoardScreen() {
   const { userSelection, playerTurn } = useGameContext();
@@ -17,6 +18,7 @@ function BoardScreen() {
       sm:pt-0 sm:pl-0 sm:pr-0 sm:pb-[0px] gap-16 sm:gap-8 relative"
     >
       <RestartTied />
+      <Options />
       <BoardHeader />
       <div className="flex flex-col gap-6">
         <Board />

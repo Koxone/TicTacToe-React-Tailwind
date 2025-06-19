@@ -13,6 +13,8 @@ function Slider() {
 
   const handleClick = (value) => {
     setUserSelection(value);
+    localStorage.setItem("userSelection", value);
+    console.log("User Selection:", value);
   };
 
   return (

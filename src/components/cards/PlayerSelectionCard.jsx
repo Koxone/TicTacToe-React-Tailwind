@@ -3,7 +3,7 @@ import Slider from "../buttons/Slider";
 import { useGameContext } from "../../context/GameContext";
 
 function PlayerSelectionCard() {
-  const { userSelection, initialState } = useGameContext();
+  const { userSelection } = useGameContext();
   return (
     <div className="w-full  sm:w-[460px] h-52 bg-semi-dark-navy rounded-2xl p-6 gap-6 flex flex-col shadow-[0_6px_0_var(--slate-900)]">
       <p className="uppercase font-bold text-base text-silver text-center">
@@ -23,6 +23,9 @@ function PlayerSelectionCard() {
   `}
         />
       </div>
+      <p className="uppercase font-bold text-xs text-silver text-center">
+        remember: <span className="text-yellow-500">O</span> goes first
+      </p>
     </div>
   );
 }

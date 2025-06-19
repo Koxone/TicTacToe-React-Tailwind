@@ -13,6 +13,9 @@ function HomeScreen() {
 
   const handleStartGame = (mode) => {
     setModeSelection(mode);
+    localStorage.setItem("modeSelection", mode);
+    console.log("Mode Selected:", mode);
+    console.log("Not Selected User:", userSelection);
     navigate("/board");
   };
 
