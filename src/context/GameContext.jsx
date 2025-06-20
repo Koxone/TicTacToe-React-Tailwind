@@ -87,6 +87,15 @@ export default function GameProvider({ children }) {
     }
   }, [userSelection]);
 
+  // Reset the board when a winner has been found and the board is not empty
+  useEffect(() => {
+    if (!winnerFound && board.some((cell) => cell.value !== null)) {
+      setBoard(
+        Array.from({ length: 9 }, () => ({ value: null, player: null }))
+      );
+    }
+  }, [winnerFound]);
+
   const resetAction = () => {
     const defaultSelection = "O";
     const calculatedPlayerTurn = {
