@@ -27,7 +27,7 @@ function BoardScreen() {
             score={playerTurn.p1 === "X" ? p1Score : p2Score}
           />
 
-          <ScoreCard title="TIES" color="silver" score={0} />
+          <ScoreCard title="TIES" color="silver" score={tiesScore} />
           <ScoreCard
             title={`O (${playerTurn.p1 === "O" ? "P1" : "P2"})`}
             color="light-yellow"
