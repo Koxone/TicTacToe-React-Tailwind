@@ -23,14 +23,14 @@ function Board() {
     updateScore,
   } = useGameContext();
 
-  // Effect: Reset the board when a winner has been found and the board is not empty
+  // Reset the board when a winner has been found and the board is not empty
   useEffect(() => {
     if (!winnerFound && board.some((cell) => cell.value !== null)) {
       setBoard(
         Array.from({ length: 9 }, () => ({ value: null, player: null }))
       );
     }
-  }, [winnerFound]);
+  }, [winnerFound]); // This means "When winnerFound changes, activate this effect"
 
   // Handle a move on the board
   const handleMove = (index) => {
