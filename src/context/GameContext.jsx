@@ -25,13 +25,11 @@ export default function GameProvider({ children }) {
   const [userSelection, setUserSelection] = useState(() =>
     getStoredValue("userSelection", "O")
   );
-  const [modeSelection, setModeSelection] = useState(() =>
-    getStoredValue("modeSelection", null)
-  );
+  const [modeSelection, setModeSelection] = useState("player");
   const [currentTurnNumber, setCurrentTurnNumber] = useState(() =>
     getStoredValue("currentTurnNumber", 0)
   );
-  const [playerTurn, setPlayerTurn] = useState(null);
+  const [playerTurn, setPlayerTurn] = useState("O");
   const [restartGame, setRestartGame] = useState(false);
   const [winnerFound, setWinnerFound] = useState(() =>
     getStoredValue("winnerFound", false)
@@ -116,8 +114,9 @@ export default function GameProvider({ children }) {
     setWinnerData(null);
     setP1Score(0);
     setP2Score(0);
+    setBoard(Array.from({ length: 9 }, () => ({ value: null, player: null })));
 
-    localStorage.removeItem("gameState");
+    localStorage.clear();
   };
 
   const newRoundAction = () => {

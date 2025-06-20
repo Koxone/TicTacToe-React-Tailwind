@@ -6,14 +6,12 @@ import PlayerSelectionCard from "../components/cards/PlayerSelectionCard";
 import { useGameContext } from "../context/GameContext";
 
 function HomeScreen() {
-  const { userSelection } = useGameContext();
-  const { modeSelection, setModeSelection } = useGameContext();
+  const { setModeSelection } = useGameContext();
 
   const navigate = useNavigate();
 
   const handleStartGame = (mode) => {
     setModeSelection(mode);
-    localStorage.setItem("modeSelection", mode);
     navigate("/board");
   };
 
