@@ -21,8 +21,8 @@ export default function checkWinner(board) {
       cellA.value === cellC.value
     ) {
       return {
-        symbol: cellA.value, // 'X' o 'O'
-        player: cellA.player, // 'P1' o 'P2'
+        symbol: cellA.value, 
+        player: cellA.player, 
       };
     }
   }

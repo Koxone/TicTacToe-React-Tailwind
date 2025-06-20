@@ -44,6 +44,7 @@ function Board() {
     if (result) {
       setWinnerFound(true);
       setWinnerData(result);
+      console.log("Prueba Result:", result);
 
       if (result.player === "P1") {
         setP1Score(p1Score + 1);

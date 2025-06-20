@@ -12,9 +12,14 @@ function AcceptButton() {
     resetAction,
     newRoundAction,
     winnerFound,
+    setWinnerFound,
   } = useGameContext();
 
-  const buttonText = restartGame ? "yes, restart" : tied ? "next round" : "";
+  const buttonText = restartGame
+    ? "yes, restart"
+    : tied || winnerFound
+    ? "next round"
+    : "";
 
   const buttonOnClick = () => {
     if (restartGame) {

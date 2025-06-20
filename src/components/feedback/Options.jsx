@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import confetti from "canvas-confetti";
 
 function Options() {
-  const { winnerFound, winnerData, lose } = useGameContext();
+  const { winnerFound, winnerData, lose, userSelection } = useGameContext();
 
   useEffect(() => {
     if (winnerFound) {
@@ -32,6 +32,7 @@ function Options() {
   const content = handleContent();
 
   if (!winnerFound && !lose) return null;
+
   return (
     <div
       className="Options absolute flex flex-col items-center justify-center 
@@ -49,7 +50,7 @@ function Options() {
               alt="game icon"
             />
             <strong
-              className={`font-bold text-2xl sm:text-[40px] text-light-${
+              className={`font-bold uppercase text-2xl sm:text-[40px] text-light-${
                 winnerData?.symbol === "X" ? "blue" : "yellow"
               } uppercase`}
             >
