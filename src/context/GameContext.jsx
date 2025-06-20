@@ -3,48 +3,48 @@ import { createContext, useContext, useState, useEffect } from "react";
 export const GameContext = createContext();
 
 export default function GameProvider({ children }) {
-  // Initial States
-  const [currentUserTurn, setCurrentUserTurn] = useState("O");
-  const [initialState, setInitialState] = useState("O");
-
-  // User Selections
-  const [userSelection, setUserSelection] = useState("O");
-  const [modeSelection, setModeSelection] = useState(null);
-
-  // Game Progress
-  const [currentTurnNumber, setCurrentTurnNumber] = useState(null);
-  const [playerTurn, setPlayerTurn] = useState(null);
-
-  // Game Results
-  const [restartGame, setRestartGame] = useState(false);
-  const [winnerFound, setWinnerFound] = useState(false);
-  const [lose, setLose] = useState(false);
-  const [tied, setTied] = useState(false);
-  const [winnerData, setWinnerData] = useState(null);
-  const [p1Score, setP1Score] = useState(0);
-  const [p2Score, setP2Score] = useState(0);
-
-  // Load state from localStorage on mount
-  useEffect(() => {
+  // Load from localStorage
+  const getStoredValue = (key, defaultValue) => {
     const stored = localStorage.getItem("gameState");
-    if (!stored) return;
+    if (!stored) return defaultValue;
+    try {
+      const parsed = JSON.parse(stored);
+      return parsed[key] !== undefined ? parsed[key] : defaultValue;
+    } catch {
+      return defaultValue;
+    }
+  };
 
-    const parsed = JSON.parse(stored);
-    if (parsed.userSelection) setUserSelection(parsed.userSelection);
-    if (parsed.modeSelection) setModeSelection(parsed.modeSelection);
-    if (parsed.currentTurnNumber != null)
-      setCurrentTurnNumber(parsed.currentTurnNumber);
-    if (parsed.currentUserTurn) setCurrentUserTurn(parsed.currentUserTurn);
-    if (parsed.initialState) setInitialState(parsed.initialState);
-    if (parsed.winnerFound != null) setWinnerFound(parsed.winnerFound);
-    if (parsed.winnerData) setWinnerData(parsed.winnerData);
-    if (parsed.lose != null) setLose(parsed.lose);
-    if (parsed.tied != null) setTied(parsed.tied);
-    if (parsed.p1Score != null) setP1Score(parsed.p1Score);
-    if (parsed.p2Score != null) setP2Score(parsed.p2Score);
-  }, []);
+  // Initial States with stored values
+  const [currentUserTurn, setCurrentUserTurn] = useState(() =>
+    getStoredValue("currentUserTurn", "O")
+  );
+  const [initialState, setInitialState] = useState(() =>
+    getStoredValue("initialState", "O")
+  );
+  const [userSelection, setUserSelection] = useState(() =>
+    getStoredValue("userSelection", "O")
+  );
+  const [modeSelection, setModeSelection] = useState(() =>
+    getStoredValue("modeSelection", null)
+  );
+  const [currentTurnNumber, setCurrentTurnNumber] = useState(() =>
+    getStoredValue("currentTurnNumber", 0)
+  );
+  const [playerTurn, setPlayerTurn] = useState(null);
+  const [restartGame, setRestartGame] = useState(false);
+  const [winnerFound, setWinnerFound] = useState(() =>
+    getStoredValue("winnerFound", false)
+  );
+  const [lose, setLose] = useState(() => getStoredValue("lose", false));
+  const [tied, setTied] = useState(() => getStoredValue("tied", false));
+  const [winnerData, setWinnerData] = useState(() =>
+    getStoredValue("winnerData", null)
+  );
+  const [p1Score, setP1Score] = useState(() => getStoredValue("p1Score", 0));
+  const [p2Score, setP2Score] = useState(() => getStoredValue("p2Score", 0));
 
-  // Save state to localStorage on change
+  // Save to localStorage on changes
   useEffect(() => {
     localStorage.setItem(
       "gameState",
@@ -76,7 +76,7 @@ export default function GameProvider({ children }) {
     p2Score,
   ]);
 
-  // Auto-calculate player turn based on user selection
+  // Calculate player turns based on selection
   useEffect(() => {
     if (userSelection) {
       const calculatedPlayerTurn = {
@@ -87,7 +87,6 @@ export default function GameProvider({ children }) {
     }
   }, [userSelection]);
 
-  // Reset full game and return to home
   const resetAction = () => {
     const defaultSelection = "O";
     const calculatedPlayerTurn = {
@@ -112,7 +111,6 @@ export default function GameProvider({ children }) {
     localStorage.removeItem("gameState");
   };
 
-  // Reset only for a new round
   const newRoundAction = () => {
     setCurrentUserTurn(initialState);
     setCurrentTurnNumber(0);
@@ -123,7 +121,16 @@ export default function GameProvider({ children }) {
     setWinnerData(null);
   };
 
-  // Context value
+  const updateScore = (player) => {
+    if (player === "P1") {
+      const updated = p1Score + 1;
+      setP1Score(updated);
+    } else if (player === "P2") {
+      const updated = p2Score + 1;
+      setP2Score(updated);
+    }
+  };
+
   const value = {
     userSelection,
     setUserSelection,
@@ -163,6 +170,7 @@ export default function GameProvider({ children }) {
     ],
     resetAction,
     newRoundAction,
+    updateScore,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

@@ -8,6 +8,7 @@ function Board() {
     Array.from({ length: 9 }, () => ({ value: null, player: null }))
   );
 
+  // Context Values
   const {
     currentUserTurn,
     setCurrentUserTurn,
@@ -19,8 +20,10 @@ function Board() {
     p2Score,
     setP1Score,
     setP2Score,
+    updateScore,
   } = useGameContext();
 
+  // Effect: Reset the board when a winner has been found and the board is not empty
   useEffect(() => {
     if (!winnerFound && board.some((cell) => cell.value !== null)) {
       setBoard(
@@ -29,6 +32,7 @@ function Board() {
     }
   }, [winnerFound]);
 
+  // Handle a move on the board
   const handleMove = (index) => {
     if (board[index].value !== null) return;
 
@@ -44,15 +48,7 @@ function Board() {
     if (result) {
       setWinnerFound(true);
       setWinnerData(result);
-      console.log("Prueba Result:", result);
-
-      if (result.player === "P1") {
-        setP1Score(p1Score + 1);
-        localStorage.setItem("p1Score", p1Score + 1);
-      } else {
-        setP2Score(p2Score + 1);
-        localStorage.setItem("p2Score", p2Score + 1);
-      }
+      updateScore(result.player);
     }
   };
 
