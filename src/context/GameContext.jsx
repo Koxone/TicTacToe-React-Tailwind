@@ -131,6 +131,10 @@ export default function GameProvider({ children }) {
     }
   };
 
+  const [board, setBoard] = useState(
+    Array.from({ length: 9 }, () => ({ value: null, player: null }))
+  );
+
   const value = {
     userSelection,
     setUserSelection,
@@ -171,6 +175,8 @@ export default function GameProvider({ children }) {
     resetAction,
     newRoundAction,
     updateScore,
+    board,
+    setBoard,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
