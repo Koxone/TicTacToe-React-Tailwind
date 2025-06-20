@@ -68,24 +68,23 @@ export default function VsCpuContextProvider({ children }) {
       playerTurn.p1 === "X" &&
       playerTurn.p2 === "O" &&
       currentTurnNumber === 0 &&
-      initialState === "O"
+      !winnerFound &&
+      board.every((cell) => cell.value === null) // tablero completamente vacío
     ) {
-      setTimeout(() => {
-        const availableIndexes = board
-          .map((cell, i) => (cell.value === null ? i : null))
-          .filter((i) => i !== null);
+      const availableIndexes = board
+        .map((cell, i) => (cell.value === null ? i : null))
+        .filter((i) => i !== null);
 
-        const randomIndex =
-          availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+      const randomIndex =
+        availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
 
-        const updatedBoard = [...board];
-        updatedBoard[randomIndex] = { value: "O", player: "P2" };
-        setBoard(updatedBoard);
-        setCurrentUserTurn("X");
-        setCurrentTurnNumber(1);
-      }, 500);
+      const updatedBoard = [...board];
+      updatedBoard[randomIndex] = { value: "O", player: "P2" };
+      setBoard(updatedBoard);
+      setCurrentUserTurn("X");
+      setCurrentTurnNumber(1);
     }
-  }, [playerTurn, board, currentTurnNumber, initialState]);
+  }, [modeSelection, playerTurn, board, currentTurnNumber, winnerFound]);
 
   const value = {
     handleMoveCpu,
