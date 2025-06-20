@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { useGameContext } from "./GameContext";
 import checkWinner from "../utils/checkWinner";
 export const VsPlayerContext = createContext();
