@@ -17,6 +17,7 @@ export default function VsCpuContextProvider({ children }) {
     winnerFound,
     setWinnerFound,
     setWinnerData,
+    modeSelection,
     updateScore,
   } = useGameContext();
 
@@ -62,6 +63,7 @@ export default function VsCpuContextProvider({ children }) {
 
   useEffect(() => {
     if (
+      modeSelection === "cpu" &&
       playerTurn &&
       playerTurn.p1 === "X" &&
       playerTurn.p2 === "O" &&

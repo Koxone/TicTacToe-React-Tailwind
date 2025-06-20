@@ -85,6 +85,12 @@ export default function GameProvider({ children }) {
     }
   }, [userSelection]);
 
+  useEffect(() => {
+    if (playerTurn) {
+      setCurrentUserTurn("O");
+    }
+  }, [playerTurn]);
+
   // Reset the board when a winner has been found and the board is not empty
   useEffect(() => {
     if (!winnerFound && board.some((cell) => cell.value !== null)) {
