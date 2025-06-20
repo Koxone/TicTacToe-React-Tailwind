@@ -317,4 +317,5 @@ body {
   background-color: var(--color-dark-navy);
   @apply flex flex-col items-center justify-center min-h-screen;
   font-family: 'Outfit', sans-serif;
+  overflow: hidden;
 }

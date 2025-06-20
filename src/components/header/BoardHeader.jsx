@@ -5,13 +5,8 @@ import RestartButton from "../buttons/RestartButton";
 import { useGameContext } from "../../context/GameContext";
 
 function BoardHeader() {
-  const { setWinnerFound } = useGameContext();
-  const clickHandler = () => {};
   return (
-    <div
-      onClick={() => setWinnerFound(true)}
-      className="flex items-center justify-between w-full max-w-[328px] sm:max-w-[457px] h-13"
-    >
+    <div className="flex items-center justify-between w-full max-w-[328px] sm:max-w-[457px] h-13">
       <MainLogo />
       <TurnCard />
       <RestartButton />

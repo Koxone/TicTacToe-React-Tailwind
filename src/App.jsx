@@ -6,7 +6,7 @@ import BoardScreen from "./pages/BoardScreen";
 function App() {
   return (
     <>
-      <div className="App flex flex-col items-center justify-center min-h-screen w-screen">
+      <div className="App  flex flex-col items-center justify-center min-h-screen w-screen">
         <Router>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
