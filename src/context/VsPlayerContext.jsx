@@ -13,6 +13,8 @@ export default function VsPlayerProvider({ children }) {
     updateScore,
     board,
     setBoard,
+    winnerFound,
+    tiedAction,
   } = useGameContext();
 
   // Handle a move on the board
@@ -32,6 +34,9 @@ export default function VsPlayerProvider({ children }) {
       setWinnerFound(true);
       setWinnerData(result);
       updateScore(result.player);
+    } else {
+      tiedAction(updatedBoard, winnerFound);
+      setCurrentUserTurn(currentUserTurn === "O" ? "X" : "O");
     }
   };
 

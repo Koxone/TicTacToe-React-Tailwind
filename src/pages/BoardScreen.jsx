@@ -6,7 +6,7 @@ import RestartTied from "../components/feedback/RestartTied";
 import Options from "../components/feedback/Options";
 
 function BoardScreen() {
-  const { playerTurn, p1Score, p2Score, tiesScore } = useGameContext();
+  const { playerTurn, p1Score, p2Score, tiedScore } = useGameContext();
 
   if (!playerTurn) return null;
 
@@ -27,7 +27,7 @@ function BoardScreen() {
             score={playerTurn.p1 === "X" ? p1Score : p2Score}
           />
 
-          <ScoreCard title="TIES" color="silver" score={tiesScore} />
+          <ScoreCard title="TIES" color="silver" score={tiedScore} />
           <ScoreCard
             title={`O (${playerTurn.p1 === "O" ? "P1" : "P2"})`}
             color="light-yellow"

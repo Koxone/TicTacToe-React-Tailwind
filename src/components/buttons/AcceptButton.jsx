@@ -6,13 +6,14 @@ function AcceptButton() {
 
   const {
     restartGame,
-    setRestartGame,
     tied,
-    setTied,
     resetAction,
     newRoundAction,
     winnerFound,
     setWinnerFound,
+    tiedAction,
+    tiedScore,
+    setTiedScore,
   } = useGameContext();
 
   const buttonText = restartGame
@@ -25,7 +26,11 @@ function AcceptButton() {
     if (restartGame) {
       resetAction();
       navigate("/");
-    } else if (tied || winnerFound) {
+    } else if (tied) {
+      setTiedScore((prev) => prev + 1);
+      localStorage.setItem("tiedScore", tiedScore);
+      newRoundAction();
+    } else if (winnerFound) {
       newRoundAction();
     }
   };

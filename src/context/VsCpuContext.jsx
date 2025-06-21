@@ -12,7 +12,6 @@ export default function VsCpuContextProvider({ children }) {
     setCurrentTurnNumber,
     currentUserTurn,
     setCurrentUserTurn,
-    initialState,
     playerTurn,
     winnerFound,
     setWinnerFound,
@@ -22,7 +21,7 @@ export default function VsCpuContextProvider({ children }) {
   } = useGameContext();
 
   const handleMoveCpu = (index) => {
-    if (board[index].value !== null || winnerFound) return;
+    if (board[index].value !== null || winnerFound) return; // If no empty squares or winner found, return
 
     const updatedBoard = [...board];
     updatedBoard[index] = { value: currentUserTurn, player: "P1" };

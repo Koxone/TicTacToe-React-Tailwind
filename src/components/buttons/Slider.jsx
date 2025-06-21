@@ -4,12 +4,11 @@ function Slider() {
   const {
     userSelection,
     setUserSelection,
-    initialState,
     playerTurn,
     setPlayerTurn,
   } = useGameContext();
 
-  const selected = userSelection || initialState;
+  const selected = userSelection;
 
   const handleClick = (value) => {
     setUserSelection(value);
