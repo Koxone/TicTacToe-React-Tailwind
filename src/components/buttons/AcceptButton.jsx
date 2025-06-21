@@ -28,13 +28,11 @@ function AcceptButton() {
       navigate("/");
     } else if (tied) {
       setTiedScore((prev) => prev + 1);
-      localStorage.setItem("tiedScore", tiedScore);
       newRoundAction();
     } else if (winnerFound) {
       newRoundAction();
     }
   };
-
   return (
     <div>
       <button

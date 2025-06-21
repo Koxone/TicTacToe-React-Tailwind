@@ -13,6 +13,7 @@ function HomeScreen() {
   const handleStartGame = (mode) => {
     setModeSelection(mode);
     navigate("/board");
+    localStorage.setItem("modeSelection", mode);
   };
 
   return (

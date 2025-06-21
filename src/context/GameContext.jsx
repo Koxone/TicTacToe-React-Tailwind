@@ -15,35 +15,32 @@ export default function GameProvider({ children }) {
     }
   };
 
-  // Initial States with stored values
-  const [modeSelection, setModeSelection] = useState("player");
-
-  const [currentTurnNumber, setCurrentTurnNumber] = useState(0);
-
-  const [playerTurn, setPlayerTurn] = useState("O");
-  const [cpuTurn, setCpuTurn] = useState(false);
-
-  const [restartGame, setRestartGame] = useState(false);
-
-  // Turno de usuario
-  const [currentUserTurn, setCurrentUserTurn] = useState(() =>
-    getStoredValue("currentUserTurn", "O")
-  );
-
-  // Seleccion de "Ficha"
+  // Initial Selection
   const [userSelection, setUserSelection] = useState(() =>
     getStoredValue("userSelection", "O")
   );
-
-  // Detectar Ganador
-  const [winnerFound, setWinnerFound] = useState(() =>
-    getStoredValue("winnerFound", false)
+  const [modeSelection, setModeSelection] = useState(() =>
+    getStoredValue("modeSelection", "player")
   );
-  const [lose, setLose] = useState(() => getStoredValue("lose", false));
-  const [tied, setTied] = useState(() => getStoredValue("tied", false));
+
+  // In Game Turn Handlers
+  const [cpuTurn, setCpuTurn] = useState(false);
+  const [playerTurn, setPlayerTurn] = useState("O");
+  const [currentTurnNumber, setCurrentTurnNumber] = useState(0);
+  const [currentUserTurn, setCurrentUserTurn] = useState("O");
+
+  // In Game States
+  const [winnerFound, setWinnerFound] = useState(false);
+  const [lose, setLose] = useState(false);
+  const [tied, setTied] = useState(false);
+  const [restartGame, setRestartGame] = useState(false);
+
+  // Winner Data State
   const [winnerData, setWinnerData] = useState(() =>
     getStoredValue("winnerData", null)
   );
+
+  // Score Data
   const [p1Score, setP1Score] = useState(() => getStoredValue("p1Score", 0));
   const [p2Score, setP2Score] = useState(() => getStoredValue("p2Score", 0));
   const [tiedScore, setTiedScore] = useState(() =>
@@ -57,28 +54,13 @@ export default function GameProvider({ children }) {
       JSON.stringify({
         userSelection,
         modeSelection,
-        currentTurnNumber,
-        currentUserTurn,
-        winnerFound,
         winnerData,
-        lose,
-        tied,
         p1Score,
         p2Score,
+        tiedScore,
       })
     );
-  }, [
-    userSelection,
-    modeSelection,
-    currentTurnNumber,
-    currentUserTurn,
-    winnerFound,
-    winnerData,
-    lose,
-    tied,
-    p1Score,
-    p2Score,
-  ]);
+  }, [userSelection, modeSelection, winnerData, p1Score, p2Score, tiedScore]);
 
   // Calculate player turns based on selection
   useEffect(() => {
@@ -125,6 +107,7 @@ export default function GameProvider({ children }) {
     setWinnerData(null);
     setP1Score(0);
     setP2Score(0);
+    setTiedScore(0);
     setBoard(Array.from({ length: 9 }, () => ({ value: null, player: null })));
 
     localStorage.clear();
@@ -187,16 +170,6 @@ export default function GameProvider({ children }) {
     setP1Score,
     p2Score,
     setP2Score,
-    winningCombinations: [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ],
     resetAction,
     newRoundAction,
     updateScore,
